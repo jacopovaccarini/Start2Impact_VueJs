@@ -11,7 +11,7 @@
     box-sizing: border-box;
     font-family: "Saira", sans-serif;
   }
-  
+
   html {
     height: 100%;
     display: flex;
@@ -26,12 +26,10 @@
     margin: auto;
     padding: 1rem;
     width: 50%;
+    height: 100%;
   }
 
   #app {
-    font-family: 'Avenir', Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
     text-align: center;
     color: #ffffff;
     display: flex;

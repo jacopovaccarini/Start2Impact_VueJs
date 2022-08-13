@@ -14,8 +14,8 @@
       {{ gameOverText }}
     </div>
 
-    <div class="reset-button" v-if="gameOver">
-      <button @click="reset()">Riavvia</button>
+    <div @click="reset()" class="reset-button" v-if="gameOver">
+      Riavvia
     </div>
   </div>
 </template>
@@ -107,8 +107,8 @@ export default {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-
-    width: 204px;
+    width: 312px;
+    height: 100%;
   }
 
   .title-text {
@@ -116,27 +116,26 @@ export default {
     justify-content: center;
     margin: auto;
     padding-bottom: 3rem;
-    font-size: 40px;
+    font-size: 60px;
     width: 100%;
   }
 
   .game-over-text {
     display: flex;
-    align-items: center;
+    justify-content: center;
     margin: auto;
     padding: 1rem;
+    font-size: 30px;
+    width: 100%;
   }
 
   .reset-button {
     display: flex;
     justify-content: center;
     margin: auto;
-    padding: 1rem;
-    width: 100%;
-  }
-
-  .reset-button button {
     padding: 0.5rem;
     width: 50%;
+    border: 1px solid white;
+    background-color: darkgreen;
   }
 </style>

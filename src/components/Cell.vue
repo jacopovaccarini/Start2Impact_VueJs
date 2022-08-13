@@ -14,14 +14,13 @@ export default {
 
 <style>
   .cell {
-    width: 64px;
-    height: 64px;
-    border: 2px solid rgb(75,75,75);
-    font-size: 42px;
-
+    width: 100px;
+    height: 100px;
+    border: 2px solid darkgreen;
+    font-size: 80px;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding-bottom: 7px;
+    padding-bottom: 12px;
   }
 </style>
