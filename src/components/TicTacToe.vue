@@ -15,8 +15,13 @@
     </div>
 
     <div @click="reset()" class="reset-button" v-if="gameOver">
-      Riavvia
+      RIAVVIA
     </div>
+
+    <div class="home-button">
+      <router-link to="/">HOME</router-link>
+    </div>
+
   </div>
 </template>
 
@@ -115,7 +120,7 @@ export default {
     display: flex;
     justify-content: center;
     margin: auto;
-    padding-bottom: 3rem;
+    padding-bottom: 2rem;
     font-size: 60px;
     width: 100%;
   }
@@ -134,7 +139,18 @@ export default {
     justify-content: center;
     margin: auto;
     padding: 0.5rem;
-    width: 50%;
+    width: 60%;
+    border: 1px solid white;
+    background-color: darkgreen;
+  }
+
+  .home-button {
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    margin-top: 0.5rem;
+    padding: 0.5rem;
+    width: 60%;
     border: 1px solid white;
     background-color: darkgreen;
   }

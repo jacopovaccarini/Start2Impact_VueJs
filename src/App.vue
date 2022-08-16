@@ -1,8 +1,17 @@
 <template>
   <div id="app">
-    <tic-tac-toe />
+    <Menu />
+    <router-view />
   </div>
 </template>
+
+<script>
+  import Menu from './components/Menu'
+  export default {
+    name: 'app',
+    component: {Menu}
+  }
+</script>
 
 <style>
   @import url("https://fonts.googleapis.com/css2?family=Saira:wght@300&display=swap");
