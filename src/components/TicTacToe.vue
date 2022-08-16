@@ -4,6 +4,14 @@
       {{ titleText }}
     </div>
 
+    <div class="type-text" v-if="type == 'Giocatore'">
+      Giocatore VS Computer
+    </div>
+
+    <div class="type-text" v-if="type == 'Giocatori'">
+      Giocatore 1 VS Giocatore 2
+    </div>
+
     <div v-for="(n, i) in 3">
       <div v-for="(n, j) in 3">
         <cell @click="performMove(i, j)" :value="board.cells[i][j]"></cell>
@@ -35,7 +43,8 @@ export default {
       titleText: 'Tic Tac Toe',
       gameOver: false,
       gameOverText: '',
-      board: new Board()
+      board: new Board(),
+      type: this.$route.params.type
     }
   },
 
@@ -120,8 +129,16 @@ export default {
     display: flex;
     justify-content: center;
     margin: auto;
-    padding-bottom: 2rem;
     font-size: 60px;
+    width: 100%;
+  }
+
+  .type-text {
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    padding-bottom: 1rem;
+    font-size: 20px;
     width: 100%;
   }
 

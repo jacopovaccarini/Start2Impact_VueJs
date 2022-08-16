@@ -14,7 +14,7 @@ export default new Router({
       component: Menu
     },
     {
-      path: '/TicTacToe/:name',
+      path: '/TicTacToe/:type',
       name: 'TicTacToe',
       component: TicTacToe
     }

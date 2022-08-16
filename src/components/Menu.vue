@@ -1,10 +1,10 @@
 <template>
   <div>
     <div class="menu-button">
-      <router-link to="/TicTacToe/giocatore">UN GIOCATORE</router-link>
+      <router-link to="/TicTacToe/Giocatore">UN GIOCATORE</router-link>
     </div>
     <div class="menu-button">
-      <router-link to="/TicTacToe/giocatori">DUE GIOCATORI</router-link>
+      <router-link to="/TicTacToe/Giocatori">DUE GIOCATORI</router-link>
     </div>
   </div>
 </template>
