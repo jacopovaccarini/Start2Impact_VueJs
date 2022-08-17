@@ -6,11 +6,13 @@ document.body.style.overflow = "hidden";
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import Menu from './components/Menu'
 import TicTacToe from './components/TicTacToe';
 import Cell from './components/Cell';
 
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
 
+Vue.component('menu', Menu);
 Vue.component('tic-tac-toe', TicTacToe);
 Vue.component('cell', Cell);
 

@@ -1,11 +1,18 @@
 <template>
   <div>
-    <div class="menu-button">
-      <router-link to="/TicTacToe/Giocatore">UN GIOCATORE</router-link>
+    <div class="title-text">
+      Tic Tac Toe
     </div>
-    <div class="menu-button">
-      <router-link to="/TicTacToe/Giocatori">DUE GIOCATORI</router-link>
-    </div>
+    <router-link to="/TicTacToe/Giocatore">
+      <div class="menu-button">
+        <a>UN GIOCATORE</a>
+      </div>
+    </router-link>
+    <router-link to="/TicTacToe/Giocatori">
+      <div class="menu-button">
+        <a>DUE GIOCATORI</a>
+      </div>
+    </router-link>
   </div>
 </template>
 
@@ -14,6 +21,14 @@
 </script>
 
 <style>
+  .title-text {
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    font-size: 60px;
+    width: 100%;
+  }
+
   .menu-button {
     display: flex;
     justify-content: center;
@@ -23,5 +38,7 @@
     width: 100%;
     border: 1px solid white;
     background-color: darkgreen;
+    color: white;
+    text-decoration-line: none;
   }
 </style>

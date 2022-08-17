@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    <Menu />
     <router-view />
   </div>
 </template>
@@ -34,7 +33,7 @@
     align-items: center;
     margin: auto;
     padding: 1rem;
-    width: 50%;
+    width: 60%;
     height: 100%;
   }
 

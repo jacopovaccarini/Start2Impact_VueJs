@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Menu from '../components/Menu'
-import TicTacToe from '../components/TicTacToe'
-import Cell from '../components/Cell'
+import Menu from '@/components/Menu'
+import TicTacToe from '@/components/TicTacToe'
+import Cell from '@/components/Cell'
 
 Vue.use(Router)
 

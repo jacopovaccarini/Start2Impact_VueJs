@@ -1,7 +1,7 @@
 <template>
   <div class="tictactoe-board">
     <div class="title-text">
-      {{ titleText }}
+      Tic Tac Toe
     </div>
 
     <div class="type-text" v-if="type == 'Giocatore'">
@@ -26,9 +26,11 @@
       RIAVVIA
     </div>
 
-    <div class="home-button">
-      <router-link to="/">HOME</router-link>
-    </div>
+    <router-link to="/">
+      <div class="home-button">
+        <a>HOME</a>
+      </div>
+    </router-link>
 
   </div>
 </template>
@@ -40,7 +42,6 @@ export default {
 
   data () {
     return {
-      titleText: 'Tic Tac Toe',
       gameOver: false,
       gameOverText: '',
       board: new Board(),
@@ -161,7 +162,7 @@ export default {
     background-color: darkgreen;
   }
 
-  .home-button {
+  .router-link-active {
     display: flex;
     justify-content: center;
     margin: auto;
@@ -171,4 +172,10 @@ export default {
     border: 1px solid white;
     background-color: darkgreen;
   }
+
+  .home-button {
+    color: white;
+    text-decoration: none;
+  }
+
 </style>
