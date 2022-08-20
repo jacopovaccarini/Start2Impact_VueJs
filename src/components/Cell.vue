@@ -12,8 +12,9 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
   .cell {
+    box-shadow: 2.5px 5px 25px #0004, 0 1px 6px #0006;
     width: 100px;
     height: 100px;
     border: 2px solid darkgreen;
@@ -22,5 +23,20 @@ export default {
     align-items: center;
     justify-content: center;
     padding-bottom: 12px;
+    cursor: not-allowed;
+
+    span {
+      text-shadow: -1px -1px 0 #000b, -1px 1px 0 #000b, 1px -1px 0 #000b, 1px 1px 0 #000b;
+    }
+  }
+
+  .cell:not([disabled]):empty:hover,
+  .cell:not([disabled]):empty:focus {
+    box-shadow: inset 0 2px 25px #0006;
+    cursor: pointer;
+  }
+
+  .cell:not([disabled]):empty:active {
+    box-shadow: inset 0 2px 50px #0008;
   }
 </style>

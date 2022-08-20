@@ -4,11 +4,11 @@
       Tic Tac Toe
     </div>
 
-    <div class="type-text" v-if="type == 'Giocatore'">
+    <div class="type-text" v-if="gameType == 'Giocatore'">
       Giocatore VS Computer
     </div>
 
-    <div class="type-text" v-if="type == 'Giocatori'">
+    <div class="type-text" v-if="gameType == 'Giocatori'">
       Giocatore 1 VS Giocatore 2
     </div>
 
@@ -18,11 +18,7 @@
       </div>
     </div>
 
-    <div class="game-over-text" v-if="gameOver">
-      {{ gameOverText }}
-    </div>
-
-    <div @click="reset()" class="reset-button" v-if="gameOver">
+    <div @click="reset()" class="reset-button" v-if="firstCell == false">
       RIAVVIA
     </div>
 
@@ -44,39 +40,97 @@ export default {
     return {
       gameOver: false,
       gameOverText: '',
-      board: new Board(),
-      type: this.$route.params.type
+      gamePlayer: Math.round(Math.random()), // 0=x, 1=o
+      gameType: this.$route.params.type,
+      firstCell: true,
+      board: new Board()
     }
   },
 
   methods: {
     performMove (x, y) {
-      if (this.gameOver) {
-        return
+      if (this.gameType == 'Giocatore') {
+        // Versione VS Computer
+        if (this.gameOver) {
+          return
+        }
+
+        if (!this.board.doMove(x, y, 'x')) {
+          // Invalid move.
+          return
+        }
+
+        this.$forceUpdate()
+
+        if (this.board.isGameOver()) {
+          this.gameOver = true
+          this.gameOverText = this.board.playerHas3InARow('x') ? 'Hai vinto!' : 'Pari'
+          this.showMessage()
+          return
+        }
+
+        let aiMove = this.minimax(this.board.clone(), 'o')
+        this.board.doMove(aiMove.move.x, aiMove.move.y, 'o')
+
+        if (this.board.isGameOver()) {
+          this.gameOver = true
+          this.gameOverText = this.board.playerHas3InARow('o') ? 'Hai perso!' : 'Pari'
+          this.showMessage()
+        }
+
+        this.$forceUpdate()
+
+      } else if (this.gameType == 'Giocatori') {
+        // Versione con due giocatori
+        if (this.gamePlayer == 0) {
+          if (this.gameOver) {
+            return
+          }
+
+          if (!this.board.doMove(x, y, 'x')) {
+            // Invalid move.
+            return
+          }
+
+          this.$forceUpdate()
+
+          if (this.board.isGameOver()) {
+            this.gameOver = true
+            this.gameOverText = this.board.playerHas3InARow('x') ? 'Ha vinto x!' : 'Pari'
+            this.showMessage()
+            return
+          }
+
+          this.gamePlayer = 1
+
+          this.$forceUpdate()
+
+        } else if (this.gamePlayer == 1) {
+          if (this.gameOver) {
+            return
+          }
+
+          if (!this.board.doMove(x, y, 'o')) {
+            // Invalid move.
+            return
+          }
+
+          this.$forceUpdate()
+
+          if (this.board.isGameOver()) {
+            this.gameOver = true
+            this.gameOverText = this.board.playerHas3InARow('o') ? 'Ha vinto o!' : 'Pari'
+            this.showMessage()
+          }
+
+          this.gamePlayer = 0
+
+          this.$forceUpdate()
+        }
       }
-
-      if (!this.board.doMove(x, y, 'x')) {
-        // Invalid move.
-        return
+      if (this.firstCell) {
+        this.firstCell = false
       }
-
-      this.$forceUpdate()
-
-      if (this.board.isGameOver()) {
-        this.gameOver = true
-        this.gameOverText = this.board.playerHas3InARow('x') ? 'Hai vinto!' : 'Pari'
-        return
-      }
-
-      let aiMove = this.minimax(this.board.clone(), 'o')
-      this.board.doMove(aiMove.move.x, aiMove.move.y, 'o')
-
-      if (this.board.isGameOver()) {
-        this.gameOver = true
-        this.gameOverText = this.board.playerHas3InARow('o') ? 'Hai perso!' : 'Pari'
-      }
-
-      this.$forceUpdate()
     },
 
     minimax (board, player, depth = 1) {
@@ -112,12 +166,34 @@ export default {
 
     reset () {
       window.location.reload()
+    },
+
+    showMessage () {
+      this.$swal({
+        title: this.gameOverText,
+        showCancelButton: false,
+        showDenyButton: true,
+        confirmButtonText: 'RIAVVIA',
+        denyButtonText: 'HOME',
+        confirmButtonColor: '#0f871f',
+        denyButtonColor: '#0f871f'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          window.location.reload()
+        }
+        if (result.isDenied) {
+          this.$router.push('/')
+        }
+        if (result.isDismissed) {
+          window.location.reload()
+        }
+      })
     }
   }
 }
 </script>
 
-<style>
+<style scoped>
   .tictactoe-board {
     display: flex;
     flex-wrap: wrap;
@@ -138,7 +214,7 @@ export default {
     display: flex;
     justify-content: center;
     margin: auto;
-    padding-bottom: 1rem;
+    margin-bottom: 1rem;
     font-size: 20px;
     width: 100%;
   }
@@ -153,22 +229,28 @@ export default {
   }
 
   .reset-button {
+    box-shadow: 2.5px 5px 25px #0004, 0 1px 6px #0006;
     display: flex;
+    flex-flow: row;
     justify-content: center;
     margin: auto;
+    margin-top: 1.5rem;
     padding: 0.5rem;
-    width: 60%;
+    width: 40%;
     border: 1px solid white;
     background-color: darkgreen;
+    cursor: pointer;
   }
 
   .router-link-active {
+    box-shadow: 2.5px 5px 25px #0004, 0 1px 6px #0006;
     display: flex;
+    flex-flow: row;
     justify-content: center;
     margin: auto;
-    margin-top: 0.5rem;
+    margin-top: 1.5rem;
     padding: 0.5rem;
-    width: 60%;
+    width: 40%;
     border: 1px solid white;
     background-color: darkgreen;
   }
@@ -176,6 +258,18 @@ export default {
   .home-button {
     color: white;
     text-decoration: none;
+  }
+
+  .reset-button:not([disabled]):hover,
+  .reset-button:not([disabled]):focus,
+  .router-link-active:not([disabled]):hover,
+  .router-link-active:not([disabled]):focus {
+    box-shadow: inset 0 2px 25px #0006;
+  }
+
+  .reset-button:not([disabled]):active,
+  .router-link-active:not([disabled]):active {
+    box-shadow: inset 0 2px 50px #0008;
   }
 
 </style>
