@@ -79,10 +79,9 @@ export default {
         }
 
         this.$forceUpdate()
-
       } else if (this.gameType === 'Giocatori') {
         // Versione con due giocatori
-        if (this.gamePlayer == 0) {
+        if (this.gamePlayer === 0) {
           if (this.gameOver) {
             return
           }
@@ -104,7 +103,6 @@ export default {
           this.gamePlayer = 1
 
           this.$forceUpdate()
-
         } else if (this.gamePlayer === 1) {
           if (this.gameOver) {
             return
