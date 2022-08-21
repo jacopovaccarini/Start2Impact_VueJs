@@ -23,7 +23,7 @@
   html {
     height: 100%;
     display: flex;
-    background-color: #0f871f;
+    background-color: lightgreen;
     }
 
   body {
@@ -34,7 +34,8 @@
     margin: auto;
     padding: 1rem;
     width: 60%;
-    height: 100%;
+    height: 90%;
+    background-color: #0f871f;
   }
 
   #app {

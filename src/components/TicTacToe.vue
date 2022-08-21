@@ -5,11 +5,11 @@
     </div>
 
     <div class="type-text" v-if="gameType == 'Giocatore'">
-      Giocatore VS Computer
+      {{ playerX }} VS Computer
     </div>
 
     <div class="type-text" v-if="gameType == 'Giocatori'">
-      Giocatore 1 VS Giocatore 2
+      {{ playerX }} VS {{ playerO }}
     </div>
 
     <div v-for="(n, i) in 3">
@@ -36,12 +36,18 @@ import Board from '../Board'
 
 export default {
 
+  created () {
+    this.showPlayerMessage('giocatore X')
+  },
+
   data () {
     return {
       gameOver: false,
       gameOverText: '',
       gamePlayer: Math.round(Math.random()), // 0=X, 1=O
       gameType: this.$route.params.type,
+      playerX: '',
+      playerO: '',
       firstCell: true,
       board: new Board()
     }
@@ -50,37 +56,7 @@ export default {
   methods: {
     performMove (x, y) {
       if (this.gameType === 'Giocatore') {
-        // Versione VS Computer
-        if (this.gameOver) {
-          return
-        }
-
-        if (!this.board.doMove(x, y, 'x')) {
-          // Invalid move.
-          return
-        }
-
-        this.$forceUpdate()
-
-        if (this.board.isGameOver()) {
-          this.gameOver = true
-          this.gameOverText = this.board.playerHas3InARow('x') ? 'Hai vinto!' : 'Pari'
-          this.showMessage()
-          return
-        }
-
-        let aiMove = this.minimax(this.board.clone(), 'o')
-        this.board.doMove(aiMove.move.x, aiMove.move.y, 'o')
-
-        if (this.board.isGameOver()) {
-          this.gameOver = true
-          this.gameOverText = this.board.playerHas3InARow('o') ? 'Hai perso!' : 'Pari'
-          this.showMessage()
-        }
-
-        this.$forceUpdate()
-      } else if (this.gameType === 'Giocatori') {
-        // Versione con due giocatori
+        // Modalità VS Computer
         if (this.gamePlayer === 0) {
           if (this.gameOver) {
             return
@@ -95,7 +71,45 @@ export default {
 
           if (this.board.isGameOver()) {
             this.gameOver = true
-            this.gameOverText = this.board.playerHas3InARow('x') ? 'Ha vinto X!' : 'Pari'
+            this.gameOverText = this.board.playerHas3InARow('x') ? 'Hai vinto!' : 'Pari'
+            this.showMessage()
+            return
+          }
+
+          this.gamePlayer = 1
+
+          setTimeout(() => this.performMove(), 1000)
+        } else if (this.gamePlayer === 1) {
+          let aiMove = this.minimax(this.board.clone(), 'o')
+          this.board.doMove(aiMove.move.x, aiMove.move.y, 'o')
+
+          if (this.board.isGameOver()) {
+            this.gameOver = true
+            this.gameOverText = this.board.playerHas3InARow('o') ? 'Hai perso!' : 'Pari'
+            this.showMessage()
+          }
+
+          this.gamePlayer = 0
+
+          this.$forceUpdate()
+        }
+      } else if (this.gameType === 'Giocatori') {
+        // Modalità con due giocatori
+        if (this.gamePlayer === 0) {
+          if (this.gameOver) {
+            return
+          }
+
+          if (!this.board.doMove(x, y, 'x')) {
+            // Invalid move.
+            return
+          }
+
+          this.$forceUpdate()
+
+          if (this.board.isGameOver()) {
+            this.gameOver = true
+            this.gameOverText = this.board.playerHas3InARow('x') ? `Ha vinto ${ this.playerX }!` : 'Pari'
             this.showMessage()
             return
           }
@@ -117,7 +131,7 @@ export default {
 
           if (this.board.isGameOver()) {
             this.gameOver = true
-            this.gameOverText = this.board.playerHas3InARow('o') ? 'Ha vinto O!' : 'Pari'
+            this.gameOverText = this.board.playerHas3InARow('o') ? `Ha vinto ${ this.playerO }!` : 'Pari'
             this.showMessage()
           }
 
@@ -178,7 +192,7 @@ export default {
         denyButtonColor: '#0f871f'
       }).then((result) => {
         if (result.isConfirmed) {
-          window.location.reload()
+          this.reset()
         }
         if (result.isDenied) {
           this.$router.push('/')
@@ -187,6 +201,39 @@ export default {
           window.location.reload()
         }
       })
+    },
+
+    showPlayerMessage (typePlayer) {
+      this.$swal({
+        title: `Nome ${typePlayer}?`,
+        input: 'text',
+        inputLabel: 'Scrivi il tuo nome',
+        showCancelButton: false,
+        confirmButtonColor: '#22b14c',
+        inputValidator: (value) => {
+          if (!value) {
+            return 'Devi inserire un nome!'
+          } else {
+            if (this.playerX === '') {
+              this.playerX = value
+              if (this.gameType === 'Giocatori') {
+                this.showPlayerMessage('giocatore O')
+              }
+            } else if (this.playerO === '') {
+              this.playerO = value
+            }
+          }
+        }
+      }).then((result) => {
+        if (result.isDismissed) {
+          this.playerX = 'Giocatore1'
+          this.playerO = 'Giocatore2'
+        }
+      })
+      if (this.gamePlayer === 1) {
+        this.performMove()
+      }
+      this.$forceUpdate()
     }
   }
 }

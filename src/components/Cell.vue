@@ -24,6 +24,8 @@ export default {
     justify-content: center;
     padding-bottom: 12px;
     cursor: not-allowed;
+    background-color: lightgreen;
+    color: darkgreen;
 
     span {
       text-shadow: -1px -1px 0 #000b, -1px 1px 0 #000b, 1px -1px 0 #000b, 1px 1px 0 #000b;
