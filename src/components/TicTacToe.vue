@@ -40,7 +40,7 @@ export default {
     return {
       gameOver: false,
       gameOverText: '',
-      gamePlayer: Math.round(Math.random()), // 0=x, 1=o
+      gamePlayer: Math.round(Math.random()), // 0=X, 1=O
       gameType: this.$route.params.type,
       firstCell: true,
       board: new Board()
@@ -49,7 +49,7 @@ export default {
 
   methods: {
     performMove (x, y) {
-      if (this.gameType == 'Giocatore') {
+      if (this.gameType === 'Giocatore') {
         // Versione VS Computer
         if (this.gameOver) {
           return
@@ -80,7 +80,7 @@ export default {
 
         this.$forceUpdate()
 
-      } else if (this.gameType == 'Giocatori') {
+      } else if (this.gameType === 'Giocatori') {
         // Versione con due giocatori
         if (this.gamePlayer == 0) {
           if (this.gameOver) {
@@ -96,7 +96,7 @@ export default {
 
           if (this.board.isGameOver()) {
             this.gameOver = true
-            this.gameOverText = this.board.playerHas3InARow('x') ? 'Ha vinto x!' : 'Pari'
+            this.gameOverText = this.board.playerHas3InARow('x') ? 'Ha vinto X!' : 'Pari'
             this.showMessage()
             return
           }
@@ -105,7 +105,7 @@ export default {
 
           this.$forceUpdate()
 
-        } else if (this.gamePlayer == 1) {
+        } else if (this.gamePlayer === 1) {
           if (this.gameOver) {
             return
           }
@@ -119,7 +119,7 @@ export default {
 
           if (this.board.isGameOver()) {
             this.gameOver = true
-            this.gameOverText = this.board.playerHas3InARow('o') ? 'Ha vinto o!' : 'Pari'
+            this.gameOverText = this.board.playerHas3InARow('o') ? 'Ha vinto O!' : 'Pari'
             this.showMessage()
           }
 
@@ -128,6 +128,7 @@ export default {
           this.$forceUpdate()
         }
       }
+
       if (this.firstCell) {
         this.firstCell = false
       }
@@ -238,6 +239,7 @@ export default {
     padding: 0.5rem;
     width: 40%;
     border: 1px solid white;
+    border-radius: 10px;
     background-color: darkgreen;
     cursor: pointer;
   }
@@ -252,6 +254,7 @@ export default {
     padding: 0.5rem;
     width: 40%;
     border: 1px solid white;
+    border-radius: 10px;
     background-color: darkgreen;
   }
 
@@ -271,5 +274,4 @@ export default {
   .router-link-active:not([disabled]):active {
     box-shadow: inset 0 2px 50px #0008;
   }
-
 </style>

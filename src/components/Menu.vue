@@ -36,6 +36,7 @@
     margin-bottom: 1.5rem;
     width: 60%;
     border: 1px solid white;
+    border-radius: 10px;
     background-color: darkgreen;
     color: white;
     text-decoration-line: none;
