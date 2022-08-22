@@ -33,8 +33,8 @@
     align-items: center;
     margin: auto;
     padding: 1rem;
-    width: 60%;
-    height: 90%;
+    width: 70%;
+    height: 100%;
     background-color: #0f871f;
   }
 

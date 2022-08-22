@@ -4,11 +4,7 @@
       Tic Tac Toe
     </div>
 
-    <div class="type-text" v-if="gameType == 'Giocatore'">
-      {{ playerX }} VS Computer
-    </div>
-
-    <div class="type-text" v-if="gameType == 'Giocatori'">
+    <div class="type-text">
       {{ playerX }} VS {{ playerO }}
     </div>
 
@@ -16,6 +12,10 @@
       <div v-for="(n, j) in 3">
         <cell @click="performMove(i, j)" :value="board.cells[i][j]"></cell>
       </div>
+    </div>
+
+    <div class="round-text" v-if="play == true">
+      {{ gameRound }}
     </div>
 
     <div @click="reset()" class="reset-button" v-if="firstCell == false">
@@ -46,9 +46,11 @@ export default {
       gameOverText: '',
       gamePlayer: Math.round(Math.random()), // 0=X, 1=O
       gameType: this.$route.params.type,
+      gameRound: '',
       playerX: '',
       playerO: '',
       firstCell: true,
+      play: false,
       board: new Board()
     }
   },
@@ -72,11 +74,15 @@ export default {
           if (this.board.isGameOver()) {
             this.gameOver = true
             this.gameOverText = this.board.playerHas3InARow('x') ? 'Hai vinto!' : 'Pari'
-            this.showMessage()
+            this.showResultMessage()
             return
           }
 
           this.gamePlayer = 1
+
+          this.gameRound = `Tocca a ${this.playerO}`
+
+          this.$forceUpdate()
 
           setTimeout(() => this.performMove(), 1000)
         } else if (this.gamePlayer === 1) {
@@ -86,10 +92,12 @@ export default {
           if (this.board.isGameOver()) {
             this.gameOver = true
             this.gameOverText = this.board.playerHas3InARow('o') ? 'Hai perso!' : 'Pari'
-            this.showMessage()
+            this.showResultMessage()
           }
 
           this.gamePlayer = 0
+
+          this.gameRound = `Tocca a ${this.playerX}`
 
           this.$forceUpdate()
         }
@@ -109,12 +117,14 @@ export default {
 
           if (this.board.isGameOver()) {
             this.gameOver = true
-            this.gameOverText = this.board.playerHas3InARow('x') ? `Ha vinto ${ this.playerX }!` : 'Pari'
-            this.showMessage()
+            this.gameOverText = this.board.playerHas3InARow('x') ? `Ha vinto ${this.playerX}!` : 'Pari'
+            this.showResultMessage()
             return
           }
 
           this.gamePlayer = 1
+
+          this.gameRound = `Tocca a ${this.playerO}`
 
           this.$forceUpdate()
         } else if (this.gamePlayer === 1) {
@@ -131,11 +141,13 @@ export default {
 
           if (this.board.isGameOver()) {
             this.gameOver = true
-            this.gameOverText = this.board.playerHas3InARow('o') ? `Ha vinto ${ this.playerO }!` : 'Pari'
-            this.showMessage()
+            this.gameOverText = this.board.playerHas3InARow('o') ? `Ha vinto ${this.playerO}!` : 'Pari'
+            this.showResultMessage()
           }
 
           this.gamePlayer = 0
+
+          this.gameRound = `Tocca a ${this.playerX}`
 
           this.$forceUpdate()
         }
@@ -181,7 +193,7 @@ export default {
       window.location.reload()
     },
 
-    showMessage () {
+    showResultMessage () {
       this.$swal({
         title: this.gameOverText,
         showCancelButton: false,
@@ -216,7 +228,9 @@ export default {
           } else {
             if (this.playerX === '') {
               this.playerX = value
-              if (this.gameType === 'Giocatori') {
+              if (this.gameType === 'Giocatore') {
+                this.playerO = 'Computer'
+              } else if (this.gameType === 'Giocatori') {
                 this.showPlayerMessage('giocatore O')
               }
             } else if (this.playerO === '') {
@@ -225,14 +239,32 @@ export default {
           }
         }
       }).then((result) => {
+        if (result.isConfirmed) {
+          if (this.gamePlayer === 0) {
+            this.gameRound = `Tocca a ${this.playerX}`
+          } else if (this.gamePlayer === 1) {
+            this.gameRound = `Tocca a ${this.playerO}`
+            setTimeout(() => this.performMove(), 1000)
+          }
+          this.play = true
+        }
         if (result.isDismissed) {
-          this.playerX = 'Giocatore1'
-          this.playerO = 'Giocatore2'
+          if (this.gameType === 'Giocatore') {
+            this.playerX = 'Giocatore'
+            this.playerO = 'Computer'
+          } else if (this.gameType === 'Giocatori') {
+            this.playerX = 'Giocatore1'
+            this.playerO = 'Giocatore2'
+          }
+          if (this.gamePlayer === 0) {
+            this.gameRound = `Tocca a ${this.playerX}`
+          } else if (this.gamePlayer === 1) {
+            this.gameRound = `Tocca a ${this.playerO}`
+            setTimeout(() => this.performMove(), 1000)
+          }
+          this.play = true
         }
       })
-      if (this.gamePlayer === 1) {
-        this.performMove()
-      }
       this.$forceUpdate()
     }
   }
@@ -244,7 +276,7 @@ export default {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    width: 312px;
+    width: 372px;
     height: 100%;
   }
 
@@ -265,13 +297,15 @@ export default {
     width: 100%;
   }
 
-  .game-over-text {
+  .round-text {
     display: flex;
     justify-content: center;
     margin: auto;
-    padding: 1rem;
-    font-size: 30px;
-    width: 100%;
+    margin-top: 1rem;
+    font-size: 20px;
+    width: 90%;
+    border: 1px solid white;
+    border-radius: 10px;
   }
 
   .reset-button {
