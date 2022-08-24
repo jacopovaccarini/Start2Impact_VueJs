@@ -294,19 +294,13 @@ export default {
     },
 
     showDifficultyMessage () { // Messaggio scelta difficoltà partita
-      const inputOptions = new Promise((resolve) => {
-        resolve({
-          1: 'Facile',
-          0: 'Difficile'
-        })
-      }).catch((err) => {
-        console.error(err)
-      })
-
       this.$swal({
         title: 'Difficoltà?',
         input: 'radio',
-        inputOptions: inputOptions,
+        inputOptions: ({
+          1: 'Facile',
+          0: 'Difficile'
+        }),
         showCancelButton: false,
         confirmButtonColor: '#0f871f',
         inputValidator: (value) => {
