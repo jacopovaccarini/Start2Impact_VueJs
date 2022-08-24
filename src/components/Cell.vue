@@ -7,7 +7,7 @@
 <script>
 export default {
   props: {
-    value: String,
+    value: String
   }
 }
 </script>
@@ -15,14 +15,14 @@ export default {
 <style scoped>
   .cell {
     box-shadow: 2.5px 5px 25px #0004, 0 1px 6px #0006;
-    width: 120px;
-    height: 120px;
+    width: 140px;
+    height: 140px;
     border: 2px solid darkgreen;
-    font-size: 100px;
+    font-size: 140px;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding-bottom: 16px;
+    padding-bottom: 22px;
     cursor: not-allowed;
     background-color: lightgreen;
     color: darkgreen;

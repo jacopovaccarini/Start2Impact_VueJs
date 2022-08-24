@@ -4,17 +4,29 @@
       Tic Tac Toe
     </div>
     <router-link to="/TicTacToe/Giocatore">
-      <div class="menu-button">
+      <div class="gametype-button">
         <a>UN GIOCATORE</a>
       </div>
     </router-link>
     <router-link to="/TicTacToe/Giocatori">
-      <div class="menu-button">
+      <div class="gametype-button">
         <a>DUE GIOCATORI</a>
       </div>
     </router-link>
   </div>
 </template>
+
+<script>
+export default {
+  created () {
+    if (this.$session.exists('playerX')) {
+      this.$session.remove('gameDifficulty');
+      this.$session.remove('playerX');
+      this.$session.remove('playerO');
+    }
+  }
+}
+</script>
 
 <style>
   .title-text {
@@ -22,32 +34,36 @@
     justify-content: center;
     margin: auto;
     margin-bottom: 2rem;
-    font-size: 60px;
+    font-size: 90px;
     width: 100%;
   }
 
-  .menu-button {
+  .gametype-button {
     box-shadow: 2.5px 5px 25px #0004, 0 1px 6px #0006;
     display: flex;
     flex-flow: column;
     justify-content: center;
     margin: auto;
-    padding: 0.5rem;
+    padding: 1rem;
     margin-bottom: 1.5rem;
-    width: 60%;
+    width: 70%;
     border: 1px solid white;
     border-radius: 10px;
     background-color: darkgreen;
     color: white;
+    font-size: 30px;
+  }
+
+  a {
     text-decoration-line: none;
   }
 
-  .menu-button:not([disabled]):hover,
-  .menu-button:not([disabled]):focus {
+  .gametype-button:not([disabled]):hover,
+  .gametype-button:not([disabled]):focus {
     box-shadow: inset 0 2px 25px #0006;
   }
 
-  .menu-button:not([disabled]):active {
+  .gametype-button:not([disabled]):active {
     box-shadow: inset 0 2px 50px #0008;
   }
 </style>

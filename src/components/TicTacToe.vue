@@ -1,14 +1,14 @@
 <template>
-  <div class="tictactoe-board">
+  <div class="game">
     <div class="title-text">
       Tic Tac Toe
     </div>
 
-    <div class="type-text">
-      {{ playerX }} VS {{ playerO }}
+    <div class="type-text" v-if="play == true">
+      {{ gameScoreX }} - {{ playerX }} VS {{ playerO }} - {{ gameScoreO }}
     </div>
 
-    <div v-for="(n, i) in 3">
+    <div class="tictactoe-board" v-for="(n, i) in 3">
       <div v-for="(n, j) in 3">
         <cell @click="performMove(i, j)" :value="board.cells[i][j]"></cell>
       </div>
@@ -18,16 +18,17 @@
       {{ gameRound }}
     </div>
 
-    <div @click="reset()" class="reset-button" v-if="firstCell == false">
-      RIAVVIA
-    </div>
-
-    <router-link to="/">
-      <div class="home-button">
-        <a>HOME</a>
+    <div class="menu-button">
+      <div @click="reset()" class="reset-button" v-if="firstCell == false">
+        RIAVVIA
       </div>
-    </router-link>
 
+      <router-link to="/">
+        <div class="home-button">
+          <a>HOME</a>
+        </div>
+      </router-link>
+    </div>
   </div>
 </template>
 
@@ -37,7 +38,30 @@ import Board from '../Board'
 export default {
 
   created () {
-    this.showPlayerMessage('giocatore X')
+    if (this.$session.exists('playerX')) {
+      this.gameDifficulty = this.$session.get('gameDifficulty')
+      this.playerX = this.$session.get('playerX')
+      this.playerO = this.$session.get('playerO')
+      this.gameScoreX = this.$session.get('gameScoreX')
+      this.gameScoreO = this.$session.get('gameScoreO')
+      if (this.gameType === 'Giocatore') {
+        if (this.gamePlayer === 0) {
+          this.gameRound = `Tocca a ${this.playerX}`
+        } else if (this.gamePlayer === 1) {
+          this.gameRound = `Tocca a ${this.playerO}`
+          setTimeout(() => this.performMove(), 1000)
+        }
+      } else if (this.gameType === 'Giocatori') {
+        if (this.gamePlayer === 0) {
+          this.gameRound = `Tocca a ${this.playerX}`
+        } else if (this.gamePlayer === 1) {
+          this.gameRound = `Tocca a ${this.playerO}`
+        }
+      }
+      this.play = true
+    } else {
+      this.showPlayerMessage('giocatore X')
+    }
   },
 
   data () {
@@ -47,6 +71,9 @@ export default {
       gamePlayer: Math.round(Math.random()), // 0=X, 1=O
       gameType: this.$route.params.type,
       gameRound: '',
+      gameDifficulty: 0,
+      gameScoreX: 0,
+      gameScoreO: 0,
       playerX: '',
       playerO: '',
       firstCell: true,
@@ -74,6 +101,9 @@ export default {
           if (this.board.isGameOver()) {
             this.gameOver = true
             this.gameOverText = this.board.playerHas3InARow('x') ? 'Hai vinto!' : 'Pari'
+            if (this.board.playerHas3InARow('x')) {
+              this.gameScoreX++
+            }
             this.showResultMessage()
             return
           }
@@ -92,6 +122,9 @@ export default {
           if (this.board.isGameOver()) {
             this.gameOver = true
             this.gameOverText = this.board.playerHas3InARow('o') ? 'Hai perso!' : 'Pari'
+            if (this.board.playerHas3InARow('o')) {
+              this.gameScoreO++
+            }
             this.showResultMessage()
           }
 
@@ -118,6 +151,9 @@ export default {
           if (this.board.isGameOver()) {
             this.gameOver = true
             this.gameOverText = this.board.playerHas3InARow('x') ? `Ha vinto ${this.playerX}!` : 'Pari'
+            if (this.board.playerHas3InARow('x')) {
+              this.gameScoreX++
+            }
             this.showResultMessage()
             return
           }
@@ -142,6 +178,9 @@ export default {
           if (this.board.isGameOver()) {
             this.gameOver = true
             this.gameOverText = this.board.playerHas3InARow('o') ? `Ha vinto ${this.playerO}!` : 'Pari'
+            if (this.board.playerHas3InARow('o')) {
+              this.gameScoreO++
+            }
             this.showResultMessage()
           }
 
@@ -170,7 +209,7 @@ export default {
       let bestMove = null
 
       let moves = board.getPossibleMoves()
-      for (let i = 0; i < moves.length; i++) {
+      for (let i = 0; i < moves.length - this.gameDifficulty; i++) {
         let move = moves[i]
         let newBoard = board.clone()
         newBoard.doMove(move.x, move.y, player)
@@ -190,10 +229,108 @@ export default {
     },
 
     reset () {
+      this.$session.set('gameDifficulty', this.gameDifficulty)
+      this.$session.set('playerX', this.playerX)
+      this.$session.set('playerO', this.playerO)
+      this.$session.set('gameScoreX', this.gameScoreX)
+      this.$session.set('gameScoreO', this.gameScoreO)
       window.location.reload()
     },
 
-    showResultMessage () {
+    showPlayerMessage (typePlayer) { // Messaggio scelta nome giocatore/i
+      this.$swal({
+        title: `Nome ${typePlayer}?`,
+        input: 'text',
+        inputLabel: 'Scrivi il tuo nome',
+        showCancelButton: false,
+        confirmButtonColor: '#0f871f',
+        inputValidator: (value) => {
+          if (!value) {
+            return 'Devi inserire un nome!'
+          } else {
+            if (this.playerX === '') {
+              this.playerX = value
+              if (this.gameType === 'Giocatore') {
+                this.playerO = 'Computer'
+              } else if (this.gameType === 'Giocatori') {
+                this.showPlayerMessage('giocatore O')
+              }
+            } else if (this.playerO === '') {
+              this.playerO = value
+            }
+          }
+        }
+      }).then((result) => {
+        if (result.isConfirmed) {
+          if (this.gameType === 'Giocatore') {
+            this.showDifficultyMessage()
+          } else if (this.gameType === 'Giocatori') {
+            if (this.gamePlayer === 0) {
+              this.gameRound = `Tocca a ${this.playerX}`
+            } else if (this.gamePlayer === 1) {
+              this.gameRound = `Tocca a ${this.playerO}`
+            }
+            this.play = true
+          }
+        }
+        if (result.isDismissed) {
+          if (this.gameType === 'Giocatore') {
+            this.playerX = 'Giocatore'
+            this.playerO = 'Computer'
+            this.showDifficultyMessage()
+          } else if (this.gameType === 'Giocatori') {
+            this.playerX = 'Giocatore1'
+            this.playerO = 'Giocatore2'
+            if (this.gamePlayer === 0) {
+              this.gameRound = `Tocca a ${this.playerX}`
+            } else if (this.gamePlayer === 1) {
+              this.gameRound = `Tocca a ${this.playerO}`
+            }
+            this.play = true
+          }
+        }
+      })
+      this.$forceUpdate()
+    },
+
+    showDifficultyMessage () { // Messaggio scelta difficoltà partita
+      const inputOptions = new Promise((resolve) => {
+        resolve({
+          1: 'Facile',
+          0: 'Difficile'
+        })
+      }).catch((err) => {
+        console.error(err)
+      })
+
+      this.$swal({
+        title: 'Difficoltà?',
+        input: 'radio',
+        inputOptions: inputOptions,
+        showCancelButton: false,
+        confirmButtonColor: '#0f871f',
+        inputValidator: (value) => {
+          if (!value) {
+            return 'Devi selezionare una difficoltà!'
+          } else {
+            this.gameDifficulty = value
+          }
+        }
+      }).then((result) => {
+        if (this.gamePlayer === 0) {
+          this.gameRound = `Tocca a ${this.playerX}`
+        } else if (this.gamePlayer === 1) {
+          this.gameRound = `Tocca a ${this.playerO}`
+          setTimeout(() => this.performMove(), 1000)
+        }
+        if (result.isDismissed) {
+          this.gameDifficulty = 0
+        }
+        this.play = true
+      })
+    },
+
+    showResultMessage () { // Messaggio risultato partita
       this.$swal({
         title: this.gameOverText,
         showCancelButton: false,
@@ -213,133 +350,86 @@ export default {
           window.location.reload()
         }
       })
-    },
-
-    showPlayerMessage (typePlayer) {
-      this.$swal({
-        title: `Nome ${typePlayer}?`,
-        input: 'text',
-        inputLabel: 'Scrivi il tuo nome',
-        showCancelButton: false,
-        confirmButtonColor: '#22b14c',
-        inputValidator: (value) => {
-          if (!value) {
-            return 'Devi inserire un nome!'
-          } else {
-            if (this.playerX === '') {
-              this.playerX = value
-              if (this.gameType === 'Giocatore') {
-                this.playerO = 'Computer'
-              } else if (this.gameType === 'Giocatori') {
-                this.showPlayerMessage('giocatore O')
-              }
-            } else if (this.playerO === '') {
-              this.playerO = value
-            }
-          }
-        }
-      }).then((result) => {
-        if (result.isConfirmed) {
-          if (this.gamePlayer === 0) {
-            this.gameRound = `Tocca a ${this.playerX}`
-          } else if (this.gamePlayer === 1) {
-            this.gameRound = `Tocca a ${this.playerO}`
-            setTimeout(() => this.performMove(), 1000)
-          }
-          this.play = true
-        }
-        if (result.isDismissed) {
-          if (this.gameType === 'Giocatore') {
-            this.playerX = 'Giocatore'
-            this.playerO = 'Computer'
-          } else if (this.gameType === 'Giocatori') {
-            this.playerX = 'Giocatore1'
-            this.playerO = 'Giocatore2'
-          }
-          if (this.gamePlayer === 0) {
-            this.gameRound = `Tocca a ${this.playerX}`
-          } else if (this.gamePlayer === 1) {
-            this.gameRound = `Tocca a ${this.playerO}`
-            setTimeout(() => this.performMove(), 1000)
-          }
-          this.play = true
-        }
-      })
-      this.$forceUpdate()
     }
+
   }
 }
 </script>
 
 <style scoped>
-  .tictactoe-board {
+  .game {
     display: flex;
-    flex-wrap: wrap;
+    flex-flow: column;
     justify-content: center;
-    width: 372px;
     height: 100%;
+    width: 100%;
   }
 
   .title-text {
-    display: flex;
     justify-content: center;
     margin: auto;
-    font-size: 60px;
+    font-size: 90px;
     width: 100%;
   }
 
   .type-text {
-    display: flex;
     justify-content: center;
     margin: auto;
-    margin-bottom: 1rem;
-    font-size: 20px;
+    margin-bottom: 1.5rem;
+    font-size: 30px;
     width: 100%;
   }
 
-  .round-text {
+  .tictactoe-board {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     margin: auto;
-    margin-top: 1rem;
-    font-size: 20px;
-    width: 90%;
+    width: 432px;
+  }
+
+  .round-text {
+    justify-content: center;
+    margin: auto;
+    margin-top: 1.5rem;
+    font-size: 30px;
+    width: 80%;
     border: 1px solid white;
     border-radius: 10px;
   }
 
-  .reset-button {
-    box-shadow: 2.5px 5px 25px #0004, 0 1px 6px #0006;
+  .menu-button {
     display: flex;
     flex-flow: row;
+    margin-top: 2.5rem;
+  }
+
+  .reset-button {
     justify-content: center;
     margin: auto;
-    margin-top: 1.5rem;
-    padding: 0.5rem;
-    width: 40%;
+    padding: 1rem;
+    width: 45%;
     border: 1px solid white;
     border-radius: 10px;
     background-color: darkgreen;
     cursor: pointer;
+    box-shadow: 2.5px 5px 25px #0004, 0 1px 6px #0006;
+    font-size: 30px;
   }
 
-  .router-link-active {
-    box-shadow: 2.5px 5px 25px #0004, 0 1px 6px #0006;
-    display: flex;
-    flex-flow: row;
+  .router-link-active { //home-button class
     justify-content: center;
     margin: auto;
-    margin-top: 1.5rem;
-    padding: 0.5rem;
-    width: 40%;
+    padding: 1rem;
+    width: 45%;
     border: 1px solid white;
     border-radius: 10px;
     background-color: darkgreen;
-  }
-
-  .home-button {
+    cursor: pointer;
+    box-shadow: 2.5px 5px 25px #0004, 0 1px 6px #0006;
+    font-size: 30px;
     color: white;
-    text-decoration: none;
+    text-decoration-line: none;
   }
 
   .reset-button:not([disabled]):hover,
