@@ -20,9 +20,9 @@
 export default {
   created () {
     if (this.$session.exists('playerX')) {
-      this.$session.remove('gameDifficulty');
-      this.$session.remove('playerX');
-      this.$session.remove('playerO');
+      this.$session.remove('gameDifficulty')
+      this.$session.remove('playerX')
+      this.$session.remove('playerO')
     }
   }
 }

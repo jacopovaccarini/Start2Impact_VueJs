@@ -411,7 +411,7 @@ export default {
     font-size: 30px;
   }
 
-  .router-link-active { //home-button class
+  .router-link-active {
     justify-content: center;
     margin: auto;
     padding: 1rem;

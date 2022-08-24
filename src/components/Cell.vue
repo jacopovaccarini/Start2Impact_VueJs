@@ -26,10 +26,10 @@ export default {
     cursor: not-allowed;
     background-color: lightgreen;
     color: darkgreen;
+  }
 
-    span {
-      text-shadow: -1px -1px 0 #000b, -1px 1px 0 #000b, 1px -1px 0 #000b, 1px 1px 0 #000b;
-    }
+  span {
+    text-shadow: -1px -1px 0 #000b, -1px 1px 0 #000b, 1px -1px 0 #000b, 1px 1px 0 #000b;
   }
 
   .cell:not([disabled]):empty:hover,

@@ -4,7 +4,7 @@ export default class Board {
       ['', '', ''],
       ['', '', ''],
       ['', '', '']
-    ];
+    ]
   }
 
   /**
@@ -88,5 +88,4 @@ export default class Board {
 
     return moves
   }
-
 }

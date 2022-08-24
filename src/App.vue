@@ -9,10 +9,10 @@ import Menu from './components/Menu'
 export default {
   name: 'app',
   component: {Menu},
-  mounted() {
-    this.$session.remove('gameDifficulty');
-    this.$session.remove('playerX');
-    this.$session.remove('playerO');
+  mounted () {
+    this.$session.remove('gameDifficulty')
+    this.$session.remove('playerX')
+    this.$session.remove('playerO')
   }
 }
 </script>
@@ -29,7 +29,7 @@ export default {
     height: 100%;
     display: flex;
     background-color: lightgreen;
-    }
+  }
 
   body {
     display: flex;
