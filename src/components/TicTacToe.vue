@@ -74,12 +74,13 @@ export default {
       gamePlayer: Math.round(Math.random()), // 0=X, 1=O
       gameType: this.$route.params.type,
       gameRound: '',
-      gameDifficulty: 0,
+      gameDifficulty: 'D',
       gameScoreX: 0,
       gameScoreO: 0,
       gameColor: 'yellow',
       playerX: '',
       playerO: '',
+      difficulty: 0,
       firstCell: false,
       play: false,
       board: new Board()
@@ -123,6 +124,13 @@ export default {
 
           setTimeout(() => this.performMove(), 1000)
         } else if (this.gamePlayer === 1) { // Giocatore O (Computer)
+          // Verifica della difficoltà
+          if (this.gameDifficulty === 'F') {
+            this.difficulty = Math.round(Math.random()) // Tra 0 e 1
+          } else if (this.gameDifficulty === 'D') {
+            this.difficulty = 0
+          }
+
           let aiMove = this.minimax(this.board.clone(), 'o')
           this.board.doMove(aiMove.move.x, aiMove.move.y, 'o')
 
@@ -217,7 +225,7 @@ export default {
       let bestMove = null
 
       let moves = board.getPossibleMoves()
-      for (let i = 0; i < moves.length - this.gameDifficulty; i++) {
+      for (let i = 0; i < Math.abs(moves.length - this.difficulty); i++) {
         let move = moves[i]
         let newBoard = board.clone()
         newBoard.doMove(move.x, move.y, player)
@@ -309,8 +317,8 @@ export default {
         title: 'Difficoltà?',
         input: 'radio',
         inputOptions: ({
-          1: 'Facile',
-          0: 'Difficile'
+          'F': 'Facile',
+          'D': 'Difficile'
         }),
         showCancelButton: false,
         confirmButtonColor: '#0f871f',
