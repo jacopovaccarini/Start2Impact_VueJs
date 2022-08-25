@@ -94,7 +94,7 @@
 
 <p>Nella pagina di gioco con il pulsante "HOME" si ritorna alla pagina principale, mentre con il pulsante "RIAVVIA", che compare dopo la prima mossa di uno dei due giocatori, si può riavviare la partita.</p>
 
-<p>A partita conclusa comparirà il messaggio del risultato, "Hai vinto!" se il giocatore ha vinto, "Pari" in caso di pareggio e "Hai perso! nel caso in cui ha vinto il computer". Nella modalità due giocatori comparirà il messaggio con il nome di chi ha vinto.</p>
+<p>A partita conclusa comparirà il messaggio del risultato, "Hai vinto!" se il giocatore ha vinto, "Pari" in caso di pareggio e "Hai perso!" nel caso in cui ha vinto il computer. Nella modalità due giocatori comparirà il messaggio con il nome di chi ha vinto.</p>
 
 [![Schermata messaggio][screenshot-progetto5]](https://jacopovaccarini.github.io/Start2Impact_VueJs/)
 
