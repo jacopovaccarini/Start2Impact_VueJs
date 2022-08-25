@@ -78,7 +78,10 @@
 <!-- ESEMPI DI UTILIZZO -->
 ## Come usare l'applicazione
 
-<p>Con il pulsante "SEARCH" si può cercare la città inserita nella textbox, mentre con il pulsante "RANDOM" si può cercare una città random tra quelle disponibili nel database.</p>
+<p>Nella pagina principale con il pulsante "UN GIOCATORE" si può giocare nella modalità giocatore singolo contro il computer, mentre con il pulsante "DUE GIOCATORI" si può giocare invece nella modalità due giocatori.</p>
+
+[![Schermata applicazione][screenshot-progetto2]](https://jacopovaccarini.github.io/Start2Impact_VueJs/)
+
 <p>Una volta cliccato su uno dei due pulsanti, compariranno sotto i dati della qualità della vita della città visualizzata nella textbox.<p>
 
 [![Schermata messaggio][screenshot-progetto4]](https://jacopovaccarini.github.io/Start2Impact_VueJs/)
@@ -137,6 +140,6 @@ Collegamento al progetto: [https://github.com/jacopovaccarini/Start2Impact_VueJs
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/jacopo-vaccarini
 [screenshot-progetto1]: src/assets/screenshot1.png
-[screenshot-progetto2]: assets/img/screenshot2.png
+[screenshot-progetto2]: src/assets/screenshot2.png
 [screenshot-progetto3]: assets/img/screenshot3.png
 [screenshot-progetto4]: assets/img/screenshot4.png
