@@ -136,7 +136,7 @@ Collegamento al progetto: [https://github.com/jacopovaccarini/Start2Impact_VueJs
 [issues-URL]: https://github.com/jacopovaccarini/Start2Impact_VueJs/issues
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/jacopo-vaccarini
-[screenshot-progetto1]: assets/screenshot1.png
+[screenshot-progetto1]: src/assets/screenshot1.png
 [screenshot-progetto2]: assets/img/screenshot2.png
 [screenshot-progetto3]: assets/img/screenshot3.png
 [screenshot-progetto4]: assets/img/screenshot4.png
