@@ -92,11 +92,13 @@
 
 <p>Invece nella modalità due giocatori comparirà due volte il messaggio per inserire il proprio nome, prima per il giocatore X e poi per il giocatore O.</p>
 
-<p>Nella pagina di gioco con il pulsante "HOME" si ritorna alla pagina principale, mentre con il pulsante "RIAVVIA", che compare dopo la prima mossa di uno dei due giocatori, si può riavviare la partita.</p>
+<p>Nella pagina di gioco con il pulsante "HOME" si ritorna alla pagina principale, mentre con il pulsante "RIAVVIA", che compare dopo la prima mossa di uno dei due giocatori, si può riavviare la partita. Sopra i pulsanti c'è l'area di gioco con sotto l'indicazione del turno di chi deve fare la mossa e sopra il nome e il punteggio dei giocatori.</p>
+
+[![Schermata applicazione][screenshot-progetto5]](https://jacopovaccarini.github.io/Start2Impact_VueJs/)
 
 <p>A partita conclusa comparirà il messaggio del risultato, "Hai vinto!" se il giocatore ha vinto, "Pari" in caso di pareggio e "Hai perso!" nel caso in cui ha vinto il computer. Nella modalità due giocatori comparirà invece l messaggio con il nome di chi ha vinto.</p>
 
-[![Schermata messaggio][screenshot-progetto5]](https://jacopovaccarini.github.io/Start2Impact_VueJs/)
+[![Schermata messaggio][screenshot-progetto6]](https://jacopovaccarini.github.io/Start2Impact_VueJs/)
 
 <p>Nel messaggio si può riavviare la partita tenendo gli stessi nomi dei giocatori e registrando il punteggio, oppure si può ritornare alla pagina principale perdendo però i nomi dei giocatori e il punteggio.</p>
 
@@ -151,3 +153,4 @@ Collegamento al progetto: [https://github.com/jacopovaccarini/Start2Impact_VueJs
 [screenshot-progetto3]: src/assets/screenshot3.png
 [screenshot-progetto4]: src/assets/screenshot4.png
 [screenshot-progetto5]: src/assets/screenshot5.png
+[screenshot-progetto5]: src/assets/screenshot6.png
