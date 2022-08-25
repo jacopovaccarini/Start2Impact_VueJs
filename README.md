@@ -94,11 +94,11 @@
 
 <p>Nella pagina di gioco con il pulsante "HOME" si ritorna alla pagina principale, mentre con il pulsante "RIAVVIA", che compare dopo la prima mossa di uno dei due giocatori, si può riavviare la partita.</p>
 
-<p>A partita conclusa comparirà il messaggio del risultato, "Hai vinto!" se il giocatore ha vinto, "Pari" in caso di pareggio e "Hai perso!" nel caso in cui ha vinto il computer. Nella modalità due giocatori comparirà il messaggio con il nome di chi ha vinto.</p>
+<p>A partita conclusa comparirà il messaggio del risultato, "Hai vinto!" se il giocatore ha vinto, "Pari" in caso di pareggio e "Hai perso!" nel caso in cui ha vinto il computer. Nella modalità due giocatori comparirà invece l messaggio con il nome di chi ha vinto.</p>
 
 [![Schermata messaggio][screenshot-progetto5]](https://jacopovaccarini.github.io/Start2Impact_VueJs/)
 
-<p>Nel messaggio si potrà riavviare la partita tenendo gli stessi nomi dei giocatori e registrando il punteggio, oppure si potrà ritornare alla pagina principale perdendo però i nomi dei giocatori e il puinteggio.</p>
+<p>Nel messaggio si può riavviare la partita tenendo gli stessi nomi dei giocatori e registrando il punteggio, oppure si può ritornare alla pagina principale perdendo però i nomi dei giocatori e il punteggio.</p>
 
 <p align="right">(<a href="#top">torna all'inizio</a>)</p>
 
@@ -107,7 +107,8 @@
 <!-- ROADMAP -->
 ## Roadmap
 
-- [x] Implementare la modalità singolo giocatore contro il computer
+- [x] Implementare la possibilità di inserire i nomi dei giocatori
+- [X] Implementare la modalità singolo giocatore contro il computer
 - [ ] Implementare la modalità due giocatori da remoto
 
 Andare sulla pagina [issues](https://github.com/jacopovaccarini/Start2Impact_VueJs/issues) per un elenco completo delle funzionalità proposte (e dei problemi noti).
