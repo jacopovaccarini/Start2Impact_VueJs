@@ -25,7 +25,7 @@ export default {
     padding-bottom: 22px;
     cursor: not-allowed;
     background-color: lightgreen;
-    color: darkgreen;
+    color: yellow;
   }
 
   span {
@@ -40,5 +40,32 @@ export default {
 
   .cell:not([disabled]):empty:active {
     box-shadow: inset 0 2px 50px #0008;
+  }
+
+  @media (max-width: 500px) {
+    .cell {
+      width: 120px;
+      height: 120px;
+      font-size: 120px;
+      padding-bottom: 20px;
+    }
+  }
+
+  @media (max-width: 430px) {
+    .cell {
+      width: 100px;
+      height: 100px;
+      font-size: 100px;
+      padding-bottom: 18px;
+    }
+  }
+
+  @media (max-width: 330px) {
+    .cell {
+      width: 80px;
+      height: 80px;
+      font-size: 80px;
+      padding-bottom: 14px;
+    }
   }
 </style>

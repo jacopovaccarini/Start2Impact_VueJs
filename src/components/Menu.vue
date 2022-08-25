@@ -66,4 +66,38 @@ export default {
   .gametype-button:not([disabled]):active {
     box-shadow: inset 0 2px 50px #0008;
   }
+
+  @media (max-width: 500px) {
+    .title-text {
+      margin-bottom: 1.5rem;
+      font-size: 80px;
+    }
+  }
+
+  @media (max-width: 430px) {
+    .title-text {
+      font-size: 70px;
+    }
+
+    .gametype-button {
+      font-size: 20px;
+    }
+  }
+
+  @media (max-width: 380px) {
+    .title-text {
+      font-size: 60px;
+    }
+
+  }
+
+  @media (max-width: 330px) {
+    .title-text {
+      font-size: 50px;
+    }
+
+    .gametype-button {
+      font-size: 15px;
+    }
+  }
 </style>

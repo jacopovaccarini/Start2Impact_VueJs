@@ -74,6 +74,7 @@ export default {
       gameDifficulty: 0,
       gameScoreX: 0,
       gameScoreO: 0,
+      gameColor: 'yellow',
       playerX: '',
       playerO: '',
       firstCell: true,
@@ -112,6 +113,8 @@ export default {
 
           this.gameRound = `Tocca a ${this.playerO}`
 
+          this.gameColor = 'orange'
+
           this.$forceUpdate()
 
           setTimeout(() => this.performMove(), 1000)
@@ -125,12 +128,14 @@ export default {
             if (this.board.playerHas3InARow('o')) {
               this.gameScoreO++
             }
-            this.showResultMessage()
+            setTimeout(() => this.showResultMessage(), 1000)
           }
 
           this.gamePlayer = 0
 
           this.gameRound = `Tocca a ${this.playerX}`
+
+          this.gameColor = 'yellow'
 
           this.$forceUpdate()
         }
@@ -436,5 +441,105 @@ export default {
   .reset-button:not([disabled]):active,
   .router-link-active:not([disabled]):active {
     box-shadow: inset 0 2px 50px #0008;
+  }
+
+  @media (max-width: 500px) {
+    .title-text {
+      font-size: 80px;
+    }
+
+    .type-text {
+      margin-bottom: 1rem;
+      font-size: 20px;
+    }
+
+    .tictactoe-board {
+      width: 372px;
+    }
+
+    .round-text {
+      font-size: 20px;
+      width: 70%;
+    }
+
+    .reset-button, .router-link-active {
+      width: 40%;
+      font-size: 20px;
+    }
+  }
+
+  @media (max-width: 430px) {
+    .title-text {
+      font-size: 70px;
+    }
+
+    .type-text {
+      margin-bottom: 1rem;
+      font-size: 20px;
+    }
+
+    .tictactoe-board {
+      width: 312px;
+    }
+
+    .round-text {
+      font-size: 20px;
+      width: 70%;
+    }
+
+    .reset-button, .router-link-active {
+      width: 35%;
+      font-size: 20px;
+    }
+  }
+
+  @media (max-width: 380px) {
+    .title-text {
+      font-size: 60px;
+    }
+
+    .type-text {
+      margin-bottom: 1rem;
+      font-size: 17px;
+    }
+
+    .tictactoe-board {
+      width: 312px;
+    }
+
+    .round-text {
+      font-size: 17px;
+      width: 65%;
+    }
+
+    .reset-button, .router-link-active {
+      width: 40%;
+      font-size: 17px;
+    }
+  }
+
+  @media (max-width: 330px) {
+    .title-text {
+      font-size: 50px;
+    }
+
+    .type-text {
+      margin-bottom: 0.5rem;
+      font-size: 15px;
+    }
+
+    .tictactoe-board {
+      width: 252px;
+    }
+
+    .round-text {
+      font-size: 15px;
+      width: 60%;
+    }
+
+    .reset-button, .router-link-active {
+      width: 40%;
+      font-size: 15px;
+    }
   }
 </style>
