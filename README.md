@@ -16,7 +16,7 @@
     <img src="src/assets/logo.png" alt="Logo" width="80" height="80">
   </a>
 
-<h2 align="center">Life Quality</h2>
+<h2 align="center">Tic Tac Toe</h2>
 
   <p align="center">
     Applicazione web del famoso gioco Tic Tac Toe
