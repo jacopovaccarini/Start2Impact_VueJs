@@ -90,7 +90,7 @@
 
 [![Schermata messaggio][screenshot-progetto4]](https://jacopovaccarini.github.io/Start2Impact_VueJs/)
 
-<p>Invece nella modalità due giocatori comparirà due volte il messaggio, prima per inserire il nome del giocatore X e poi del giocatore O.</p>
+<p>Invece nella modalità due giocatori comparirà due volte il messaggio per inserire il proprio nome, prima per il giocatore X e poi per il giocatore O.</p>
 
 <p>Nella pagina di gioco con il pulsante "HOME" si ritorna alla pagina principale, mentre con il pulsante "RIAVVIA", che compare dopo la prima mossa di uno dei due giocatori, si può riavviare la partita.</p>
 
