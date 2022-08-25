@@ -58,7 +58,7 @@
 
 [![Schermata applicazione][screenshot-progetto1]](https://jacopovaccarini.github.io/Start2Impact_VueJs/)
 
-<p>Questo progetto consiste in un'applicazione web del famoso gioco Tic Tac Toe. L'applicazione è costituita da una pagina principale con due pulsanti, uno per giocare nella modalità giocatore singolo (contro il computer) e un altro per giocare in modalità due giocatori.</p>
+<p>Questo progetto consiste in un'applicazione web del famoso gioco Tic Tac Toe. L'applicazione è costituita da una pagina principale con due pulsanti, uno per giocare nella modalità giocatore singolo (contro il computer) e un altro per giocare in modalità due giocatori, e una pagina secondaria con il gioco.</p>
 
 <p align="right">(<a href="#top">torna all'inizio</a>)</p>
 
