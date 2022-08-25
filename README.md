@@ -82,17 +82,23 @@
 
 [![Schermata applicazione][screenshot-progetto2]](https://jacopovaccarini.github.io/Start2Impact_VueJs/)
 
-<p>Una volta cliccato su uno dei due pulsanti, compariranno sotto i dati della qualità della vita della città visualizzata nella textbox.<p>
-
-[![Schermata messaggio][screenshot-progetto4]](https://jacopovaccarini.github.io/Start2Impact_VueJs/)
-
-<p>Nel caso in cui la textbox fosse vuota, uscirà un messaggio che comunica che non è stato inserito nessun nome di città nella textbox.</p>
+<p>Una volta cliccato su uno dei due pulsanti, nella modalità giocatore singolo comparirà il messaggio per inserire il proprio nome.<p>
 
 [![Schermata messaggio][screenshot-progetto3]](https://jacopovaccarini.github.io/Start2Impact_VueJs/)
 
-<p>Invece nel caso in cui la città inserita nella textbox non fosse disponibile, uscirà un messaggio che comunica che la città inserita non è stata trovata.</p>
+<p>Poi subito dopo comparirà il messaggio per scegliere la difficoltà.</p>
 
-[![Schermata messaggio][screenshot-progetto2]](https://jacopovaccarini.github.io/Start2Impact_VueJs/)
+[![Schermata messaggio][screenshot-progetto4]](https://jacopovaccarini.github.io/Start2Impact_VueJs/)
+
+<p>Invece nella modalità due giocatori comparirà due volte il messaggio, prima per inserire il nome del giocatore X e poi del giocatore O.</p>
+
+<p>Nella pagina di gioco con il pulsante "HOME" si ritorna alla pagina principale, mentre con il pulsante "RIAVVIA", che compare dopo la prima mossa di uno dei due giocatori, si può riavviare la partita.</p>
+
+<p>A partita conclusa comparirà il messaggio del risultato, "Hai vinto!" se il giocatore ha vinto, "Pari" in caso di pareggio e "Hai perso! nel caso in cui ha vinto il computer". Nella modalità due giocatori comparirà il messaggio con il nome di chi ha vinto.</p>
+
+[![Schermata messaggio][screenshot-progetto5]](https://jacopovaccarini.github.io/Start2Impact_VueJs/)
+
+<p>Nel messaggio si potrà riavviare la partita tenendo gli stessi nomi dei giocatori e registrando il punteggio, oppure si potrà ritornare alla pagina principale perdendo però i nomi dei giocatori e il puinteggio.</p>
 
 <p align="right">(<a href="#top">torna all'inizio</a>)</p>
 
@@ -141,5 +147,7 @@ Collegamento al progetto: [https://github.com/jacopovaccarini/Start2Impact_VueJs
 [linkedin-url]: https://linkedin.com/in/jacopo-vaccarini
 [screenshot-progetto1]: src/assets/screenshot1.png
 [screenshot-progetto2]: src/assets/screenshot2.png
-[screenshot-progetto3]: assets/img/screenshot3.png
-[screenshot-progetto4]: assets/img/screenshot4.png
+[screenshot-progetto3]: src/assets/screenshot3.png
+[screenshot-progetto4]: src/assets/screenshot4.png
+[screenshot-progetto5]: src/assets/screenshot5.png
+[screenshot-progetto6]: src/assets/screenshot6.png
