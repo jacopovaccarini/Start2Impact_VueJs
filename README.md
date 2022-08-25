@@ -111,6 +111,7 @@
 
 - [x] Implementare la possibilità di inserire i nomi dei giocatori
 - [X] Implementare la modalità singolo giocatore contro il computer
+- [X] Implementare la possibilità di scegliere la difficoltà nella modalità contro il computer
 - [ ] Implementare la modalità due giocatori da remoto
 
 Andare sulla pagina [issues](https://github.com/jacopovaccarini/Start2Impact_VueJs/issues) per un elenco completo delle funzionalità proposte (e dei problemi noti).
