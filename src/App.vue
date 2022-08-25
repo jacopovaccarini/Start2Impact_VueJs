@@ -8,12 +8,7 @@
 import Menu from './components/Menu'
 export default {
   name: 'app',
-  component: {Menu},
-  mounted () {
-    this.$session.remove('gameDifficulty')
-    this.$session.remove('playerX')
-    this.$session.remove('playerO')
-  }
+  component: {Menu}
 }
 </script>
 

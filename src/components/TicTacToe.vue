@@ -1,5 +1,5 @@
 <template>
-  <div class="game">
+  <div class="game-page">
     <div class="title-text">
       Tic Tac Toe
     </div>
@@ -8,7 +8,7 @@
       {{ gameScoreX }} - {{ playerX }} VS {{ playerO }} - {{ gameScoreO }}
     </div>
 
-    <div class="tictactoe-board" v-for="(n, i) in 3">
+    <div class="game-board" v-for="(n, i) in 3">
       <div v-for="(n, j) in 3">
         <cell @click="performMove(i, j)" :value="board.cells[i][j]"></cell>
       </div>
@@ -19,7 +19,7 @@
     </div>
 
     <div class="menu-button">
-      <div @click="reset()" class="reset-button" v-if="firstCell == false">
+      <div @click="reset()" class="reset-button" v-if="firstCell == true">
         RIAVVIA
       </div>
 
@@ -38,12 +38,14 @@ import Board from '../Board'
 export default {
 
   created () {
+    // Recupero dati dallo storage
     if (this.$session.exists('playerX')) {
       this.gameDifficulty = this.$session.get('gameDifficulty')
       this.playerX = this.$session.get('playerX')
       this.playerO = this.$session.get('playerO')
       this.gameScoreX = this.$session.get('gameScoreX')
       this.gameScoreO = this.$session.get('gameScoreO')
+      // Scrittura turno e avvio gioco
       if (this.gameType === 'Giocatore') {
         if (this.gamePlayer === 0) {
           this.gameRound = `Tocca a ${this.playerX}`
@@ -60,6 +62,7 @@ export default {
       }
       this.play = true
     } else {
+      // Avvio messaggio scelta nome giocatore/i
       this.showPlayerMessage('giocatore X')
     }
   },
@@ -77,17 +80,18 @@ export default {
       gameColor: 'yellow',
       playerX: '',
       playerO: '',
-      firstCell: true,
+      firstCell: false,
       play: false,
       board: new Board()
     }
   },
 
   methods: {
+    // Funzione posizionamento X/O
     performMove (x, y) {
+      // Modalità VS Computer
       if (this.gameType === 'Giocatore') {
-        // Modalità VS Computer
-        if (this.gamePlayer === 0) {
+        if (this.gamePlayer === 0) { // Giocatore X
           if (this.gameOver) {
             return
           }
@@ -102,9 +106,11 @@ export default {
           if (this.board.isGameOver()) {
             this.gameOver = true
             this.gameOverText = this.board.playerHas3InARow('x') ? 'Hai vinto!' : 'Pari'
+            // Aumento punteggio giocatore X
             if (this.board.playerHas3InARow('x')) {
               this.gameScoreX++
             }
+            // Avvio messaggio risultato partita
             this.showResultMessage()
             return
           }
@@ -113,12 +119,10 @@ export default {
 
           this.gameRound = `Tocca a ${this.playerO}`
 
-          this.gameColor = 'orange'
-
           this.$forceUpdate()
 
           setTimeout(() => this.performMove(), 1000)
-        } else if (this.gamePlayer === 1) {
+        } else if (this.gamePlayer === 1) { // Giocatore O (Computer)
           let aiMove = this.minimax(this.board.clone(), 'o')
           this.board.doMove(aiMove.move.x, aiMove.move.y, 'o')
 
@@ -135,13 +139,10 @@ export default {
 
           this.gameRound = `Tocca a ${this.playerX}`
 
-          this.gameColor = 'yellow'
-
           this.$forceUpdate()
         }
-      } else if (this.gameType === 'Giocatori') {
-        // Modalità con due giocatori
-        if (this.gamePlayer === 0) {
+      } else if (this.gameType === 'Giocatori') { // Modalità con due giocatori
+        if (this.gamePlayer === 0) { // Giocatore X
           if (this.gameOver) {
             return
           }
@@ -168,7 +169,7 @@ export default {
           this.gameRound = `Tocca a ${this.playerO}`
 
           this.$forceUpdate()
-        } else if (this.gamePlayer === 1) {
+        } else if (this.gamePlayer === 1) { // Giocatore O
           if (this.gameOver) {
             return
           }
@@ -197,11 +198,13 @@ export default {
         }
       }
 
-      if (this.firstCell) {
-        this.firstCell = false
+      // Controllo prima cella per sblocco pulsante "Riavvia"
+      if (!this.firstCell) {
+        this.firstCell = true
       }
     },
 
+    // Funzione controllo movimenti
     minimax (board, player, depth = 1) {
       if (board.isGameOver()) {
         return {
@@ -234,6 +237,7 @@ export default {
     },
 
     reset () {
+      // Inserimento dati nello storage e ricarica della pagina
       this.$session.set('gameDifficulty', this.gameDifficulty)
       this.$session.set('playerX', this.playerX)
       this.$session.set('playerO', this.playerO)
@@ -242,7 +246,8 @@ export default {
       window.location.reload()
     },
 
-    showPlayerMessage (typePlayer) { // Messaggio scelta nome giocatore/i
+    // Messaggio scelta nome giocatore/i
+    showPlayerMessage (typePlayer) {
       this.$swal({
         title: `Nome ${typePlayer}?`,
         input: 'text',
@@ -298,7 +303,8 @@ export default {
       this.$forceUpdate()
     },
 
-    showDifficultyMessage () { // Messaggio scelta difficoltà partita
+    // Messaggio scelta difficoltà partita
+    showDifficultyMessage () {
       this.$swal({
         title: 'Difficoltà?',
         input: 'radio',
@@ -329,7 +335,8 @@ export default {
       })
     },
 
-    showResultMessage () { // Messaggio risultato partita
+    // Messaggio risultato partita
+    showResultMessage () {
       this.$swal({
         title: this.gameOverText,
         showCancelButton: false,
@@ -356,7 +363,7 @@ export default {
 </script>
 
 <style scoped>
-  .game {
+  .game-page {
     display: flex;
     flex-flow: column;
     justify-content: center;
@@ -379,7 +386,7 @@ export default {
     width: 100%;
   }
 
-  .tictactoe-board {
+  .game-board {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -453,7 +460,7 @@ export default {
       font-size: 20px;
     }
 
-    .tictactoe-board {
+    .game-board {
       width: 372px;
     }
 
@@ -478,7 +485,7 @@ export default {
       font-size: 20px;
     }
 
-    .tictactoe-board {
+    .game-board {
       width: 312px;
     }
 
@@ -503,7 +510,7 @@ export default {
       font-size: 17px;
     }
 
-    .tictactoe-board {
+    .game-board {
       width: 312px;
     }
 
@@ -528,7 +535,7 @@ export default {
       font-size: 15px;
     }
 
-    .tictactoe-board {
+    .game-board {
       width: 252px;
     }
 

@@ -10,8 +10,8 @@ import Cell from './components/Cell'
 
 Vue.config.productionTip = false
 
-Vue.use(VueSweetalert2)
-Vue.use(VueSessionStorage)
+Vue.use(VueSweetalert2) // Per i messaggi a schermo
+Vue.use(VueSessionStorage) // Per lo storage dei dati durante la partita
 
 Vue.component('menu', Menu)
 Vue.component('tic-tac-toe', TicTacToe)

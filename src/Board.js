@@ -8,10 +8,10 @@ export default class Board {
   }
 
   /**
-   * @param x The x location
-   * @param y The y location
-   * @param player The player either 'x' or 'o'
-   * @returns {boolean} True if successful, False if invalid move.
+   * @param x Posizione X
+   * @param y Posizione Y
+   * @param player Giocatore X o O
+   * @returns {boolean} True in caso di successo, False in caso di mossa non valida
    */
 
   doMove (x, y, player) {

@@ -19,10 +19,13 @@
 <script>
 export default {
   created () {
+    // Rimozione dati vecchi dallo storage
     if (this.$session.exists('playerX')) {
       this.$session.remove('gameDifficulty')
       this.$session.remove('playerX')
       this.$session.remove('playerO')
+      this.$session.remove('gameScoreX')
+      this.$session.remove('gameScoreO')
     }
   }
 }
@@ -54,10 +57,6 @@ export default {
     font-size: 30px;
   }
 
-  a {
-    text-decoration-line: none;
-  }
-
   .gametype-button:not([disabled]):hover,
   .gametype-button:not([disabled]):focus {
     box-shadow: inset 0 2px 25px #0006;
@@ -65,6 +64,10 @@ export default {
 
   .gametype-button:not([disabled]):active {
     box-shadow: inset 0 2px 50px #0008;
+  }
+
+  a {
+    text-decoration-line: none;
   }
 
   @media (max-width: 500px) {

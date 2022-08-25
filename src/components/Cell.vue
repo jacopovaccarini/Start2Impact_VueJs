@@ -28,10 +28,6 @@ export default {
     color: yellow;
   }
 
-  span {
-    text-shadow: -1px -1px 0 #000b, -1px 1px 0 #000b, 1px -1px 0 #000b, 1px 1px 0 #000b;
-  }
-
   .cell:not([disabled]):empty:hover,
   .cell:not([disabled]):empty:focus {
     box-shadow: inset 0 2px 25px #0006;
@@ -40,6 +36,10 @@ export default {
 
   .cell:not([disabled]):empty:active {
     box-shadow: inset 0 2px 50px #0008;
+  }
+
+  span {
+    text-shadow: -1px -1px 0 #000b, -1px 1px 0 #000b, 1px -1px 0 #000b, 1px 1px 0 #000b;
   }
 
   @media (max-width: 500px) {
