@@ -96,7 +96,7 @@
 
 [![Schermata applicazione][screenshot-progetto5]](https://jacopovaccarini.github.io/Start2Impact_VueJs/)
 
-<p>A partita conclusa comparirà il messaggio del risultato, "Hai vinto!" se il giocatore ha vinto, "Pari" in caso di pareggio e "Hai perso!" nel caso in cui ha vinto il computer. Nella modalità due giocatori comparirà invece l messaggio con il nome di chi ha vinto.</p>
+<p>A partita conclusa comparirà il messaggio del risultato, "Hai vinto!" se il giocatore ha vinto, "Pari" in caso di pareggio e "Hai perso!" nel caso in cui ha vinto il computer. Nella modalità due giocatori comparirà invece il messaggio con il nome di chi ha vinto.</p>
 
 [![Schermata messaggio][screenshot-progetto6]](https://jacopovaccarini.github.io/Start2Impact_VueJs/)
 
