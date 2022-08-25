@@ -153,4 +153,4 @@ Collegamento al progetto: [https://github.com/jacopovaccarini/Start2Impact_VueJs
 [screenshot-progetto3]: src/assets/screenshot3.png
 [screenshot-progetto4]: src/assets/screenshot4.png
 [screenshot-progetto5]: src/assets/screenshot5.png
-[screenshot-progetto5]: src/assets/screenshot6.png
+[screenshot-progetto6]: src/assets/screenshot6.png
