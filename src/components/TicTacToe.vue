@@ -508,7 +508,7 @@ export default {
     }
   }
 
-  @media (max-width: 380px) {
+  @media (max-width: 380px) or (max-height: 625px) {
     .title-text {
       font-size: 60px;
     }
