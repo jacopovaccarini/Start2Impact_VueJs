@@ -77,7 +77,7 @@ export default {
     }
   }
 
-  @media (max-width: 430px) or (max-height: 700px) {
+  @media (max-width: 430px) or (max-height: 800px) {
     .title-text {
       font-size: 70px;
     }
