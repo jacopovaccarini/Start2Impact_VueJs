@@ -60,7 +60,7 @@ export default {
     }
   }
 
-  @media (max-width: 380px) or (max-height: 625px) {
+  @media (max-width: 380px) or (max-height: 700px) {
     .cell {
       width: 100px;
       height: 100px;
